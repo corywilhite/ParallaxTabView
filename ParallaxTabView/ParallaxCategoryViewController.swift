@@ -12,7 +12,7 @@ struct ViewableCategory {
     
 }
 
-class ParallaxTabViewController: UIViewController {
+class ParallaxCategoryViewController: UIViewController {
     
     required init(categories: [ViewableCategory]) {
         super.init(nibName: nil, bundle: nil)
@@ -28,3 +28,5 @@ class ParallaxTabViewController: UIViewController {
         view.backgroundColor = .whiteColor()
     }
 }
+
+
