@@ -13,10 +13,6 @@
 		7AFFD0471D58D23B009E8CB2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AFFD0451D58D23B009E8CB2 /* LaunchScreen.storyboard */; };
 		7AFFD0521D58D23B009E8CB2 /* ParallaxTabViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD0511D58D23B009E8CB2 /* ParallaxTabViewTests.swift */; };
 		7AFFD05F1D58D3DC009E8CB2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD05D1D58D3DC009E8CB2 /* ViewController.swift */; };
-		7AFFD06B1D5912B5009E8CB2 /* ParallaxHeaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD0671D5912B5009E8CB2 /* ParallaxHeaderController.swift */; };
-		7AFFD06C1D5912B5009E8CB2 /* ParallaxScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD0681D5912B5009E8CB2 /* ParallaxScrollView.swift */; };
-		7AFFD06D1D5912B5009E8CB2 /* ParallaxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD0691D5912B5009E8CB2 /* ParallaxView.swift */; };
-		7AFFD06E1D5912B5009E8CB2 /* ScrollViewDelegateForwarder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD06A1D5912B5009E8CB2 /* ScrollViewDelegateForwarder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,10 +36,6 @@
 		7AFFD0511D58D23B009E8CB2 /* ParallaxTabViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxTabViewTests.swift; sourceTree = "<group>"; };
 		7AFFD0531D58D23B009E8CB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7AFFD05D1D58D3DC009E8CB2 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		7AFFD0671D5912B5009E8CB2 /* ParallaxHeaderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxHeaderController.swift; sourceTree = "<group>"; };
-		7AFFD0681D5912B5009E8CB2 /* ParallaxScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxScrollView.swift; sourceTree = "<group>"; };
-		7AFFD0691D5912B5009E8CB2 /* ParallaxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxView.swift; sourceTree = "<group>"; };
-		7AFFD06A1D5912B5009E8CB2 /* ScrollViewDelegateForwarder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewDelegateForwarder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,10 +100,6 @@
 		7AFFD0661D5912B5009E8CB2 /* Parallax Scroll View */ = {
 			isa = PBXGroup;
 			children = (
-				7AFFD0671D5912B5009E8CB2 /* ParallaxHeaderController.swift */,
-				7AFFD0681D5912B5009E8CB2 /* ParallaxScrollView.swift */,
-				7AFFD0691D5912B5009E8CB2 /* ParallaxView.swift */,
-				7AFFD06A1D5912B5009E8CB2 /* ScrollViewDelegateForwarder.swift */,
 			);
 			path = "Parallax Scroll View";
 			sourceTree = "<group>";
@@ -218,10 +206,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AFFD05F1D58D3DC009E8CB2 /* ViewController.swift in Sources */,
-				7AFFD06D1D5912B5009E8CB2 /* ParallaxView.swift in Sources */,
-				7AFFD06B1D5912B5009E8CB2 /* ParallaxHeaderController.swift in Sources */,
-				7AFFD06E1D5912B5009E8CB2 /* ScrollViewDelegateForwarder.swift in Sources */,
-				7AFFD06C1D5912B5009E8CB2 /* ParallaxScrollView.swift in Sources */,
 				7AFFD03D1D58D23B009E8CB2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,6 +396,7 @@
 				7AFFD0581D58D23B009E8CB2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7AFFD0591D58D23B009E8CB2 /* Build configuration list for PBXNativeTarget "ParallaxTabViewTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +405,7 @@
 				7AFFD05B1D58D23B009E8CB2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
