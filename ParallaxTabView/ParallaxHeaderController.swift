@@ -14,6 +14,8 @@ protocol ParallaxHeaderViewType {
 
 class ParallaxHeaderController: NSObject {
     
+    // MARK: - Constructors
+    
     class func with(customView customView: UIView, height: CGFloat, minimumHeight: CGFloat) -> ParallaxHeaderController {
         let header = ParallaxHeaderController()
         header.view = customView
@@ -31,6 +33,8 @@ class ParallaxHeaderController: NSObject {
         
         return header
     }
+    
+    // MARK: - Properties
     
     weak var scrollView: UIScrollView? {
         didSet {
@@ -72,6 +76,19 @@ class ParallaxHeaderController: NSObject {
         }
     }
     
+    var minimumHeight: CGFloat = 50 {
+        didSet {
+            layoutContentView()
+        }
+    }
+    
+    var progress: CGFloat {
+        let x = height > 0 ? (1 / height) * contentView.frame.size.height - minimumHeight : 1
+        return x - 1
+    }
+    
+    // MARK: - Helpers
+    
     private func set(contentInsetTop contentInsetTop: CGFloat, of scrollView: UIScrollView?) {
         guard let scrollView = scrollView else { return }
         
@@ -85,17 +102,7 @@ class ParallaxHeaderController: NSObject {
         scrollView.contentInset = inset
     }
     
-    var minimumHeight: CGFloat = 50 {
-        didSet {
-            layoutContentView()
-        }
-    }
-    var progress: CGFloat {
-        let x = height > 0 ? (1 / height) * contentView.frame.size.height - minimumHeight : 1
-        return x - 1
-    }
-    
-    func updateConstraints() -> Void {
+    private func updateConstraints() -> Void {
         
         guard let view = view else { return debugPrint("nil view") }
         
@@ -106,7 +113,7 @@ class ParallaxHeaderController: NSObject {
         setFillConstraints(for: view, to: contentView)
     }
     
-    func setFillConstraints(for view: UIView, to contentView: UIView) {
+    private func setFillConstraints(for view: UIView, to contentView: UIView) {
         let binding = ["v": view]
         
         let layoutFormatOption = NSLayoutFormatOptions(rawValue: 0)
@@ -128,7 +135,7 @@ class ParallaxHeaderController: NSObject {
         contentView.addConstraints(horizConstraints + vertConstraints)
     }
     
-    func layoutContentView() -> Void {
+    private func layoutContentView() -> Void {
         guard let scrollView = scrollView else { return }
         let minHeight = min(minimumHeight, height)
         let relativeYOffset = height - scrollView.contentOffset.y - scrollView.contentInset.top
@@ -140,6 +147,8 @@ class ParallaxHeaderController: NSObject {
             height: max(relativeYOffset, minHeight)
         )
     }
+    
+    // MARK: - KVO Observing
     
     static let context = UnsafeMutablePointer<Void>.alloc(1)
     
