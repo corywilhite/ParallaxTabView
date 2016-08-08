@@ -124,16 +124,17 @@ class ParallaxTabCollectionController: NSObject, UICollectionViewDataSource, UIC
         let normalAttributedTitle = model.normalAttributedTitle()
         let selectedAttributedTitle = model.selectedAttributedTitle()
         
+        let drawingOption = NSStringDrawingOptions(rawValue: 0)
         
         let normalBoundingRect = normalAttributedTitle.boundingRectWithSize(
             CGSize(width: CGFloat.max, height: collectionView.frame.height),
-            options: NSStringDrawingOptions(rawValue: 0),
+            options: drawingOption,
             context: nil
         )
         
         let selectedBoundingRect = selectedAttributedTitle.boundingRectWithSize(
             CGSize(width: CGFloat.max, height: collectionView.frame.height),
-            options: NSStringDrawingOptions(rawValue: 0),
+            options: drawingOption,
             context: nil
         )
         
