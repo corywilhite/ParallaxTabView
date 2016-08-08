@@ -24,7 +24,7 @@ class ViewController: UIViewController, ParallaxScrollViewDelegate {
         )
         
         castView = ParallaxScrollView(
-            frame: view.frame,
+            frame: .zero,
             parallaxHeader: header,
             delegate: self
         )
@@ -44,9 +44,6 @@ class ViewController: UIViewController, ParallaxScrollViewDelegate {
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        
-        
-        
         
     }
 }
