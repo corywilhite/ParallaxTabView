@@ -1,0 +1,3 @@
+[submodule "ParallaxTabView/ParallaxScrollView"]
+	path = ParallaxTabView/ParallaxScrollView
+	url = https://github.com/corywilhite/ParallaxScrollView.git
