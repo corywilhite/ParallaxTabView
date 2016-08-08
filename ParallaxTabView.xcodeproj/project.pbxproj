@@ -8,16 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		7AFFD03D1D58D23B009E8CB2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD03C1D58D23B009E8CB2 /* AppDelegate.swift */; };
-		7AFFD0421D58D23B009E8CB2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AFFD0401D58D23B009E8CB2 /* Main.storyboard */; };
 		7AFFD0441D58D23B009E8CB2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AFFD0431D58D23B009E8CB2 /* Assets.xcassets */; };
 		7AFFD0471D58D23B009E8CB2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AFFD0451D58D23B009E8CB2 /* LaunchScreen.storyboard */; };
 		7AFFD0521D58D23B009E8CB2 /* ParallaxTabViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD0511D58D23B009E8CB2 /* ParallaxTabViewTests.swift */; };
-		7AFFD05F1D58D3DC009E8CB2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD05D1D58D3DC009E8CB2 /* ViewController.swift */; };
 		7AFFD0751D591904009E8CB2 /* ParallaxHeaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD0701D591904009E8CB2 /* ParallaxHeaderController.swift */; };
 		7AFFD0761D591904009E8CB2 /* ParallaxScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD0711D591904009E8CB2 /* ParallaxScrollView.swift */; };
 		7AFFD0771D591904009E8CB2 /* ParallaxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD0721D591904009E8CB2 /* ParallaxView.swift */; };
 		7AFFD0781D591904009E8CB2 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD0731D591904009E8CB2 /* README.md */; };
 		7AFFD0791D591904009E8CB2 /* ScrollViewDelegateForwarder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD0741D591904009E8CB2 /* ScrollViewDelegateForwarder.swift */; };
+		7AFFD07B1D59199C009E8CB2 /* ParallaxTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD07A1D59199C009E8CB2 /* ParallaxTabViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,19 +32,18 @@
 /* Begin PBXFileReference section */
 		7AFFD0391D58D23B009E8CB2 /* ParallaxTabView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParallaxTabView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AFFD03C1D58D23B009E8CB2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7AFFD0411D58D23B009E8CB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7AFFD0431D58D23B009E8CB2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7AFFD0461D58D23B009E8CB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7AFFD0481D58D23B009E8CB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7AFFD04D1D58D23B009E8CB2 /* ParallaxTabViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ParallaxTabViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AFFD0511D58D23B009E8CB2 /* ParallaxTabViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxTabViewTests.swift; sourceTree = "<group>"; };
 		7AFFD0531D58D23B009E8CB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7AFFD05D1D58D3DC009E8CB2 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7AFFD0701D591904009E8CB2 /* ParallaxHeaderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxHeaderController.swift; sourceTree = "<group>"; };
 		7AFFD0711D591904009E8CB2 /* ParallaxScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxScrollView.swift; sourceTree = "<group>"; };
 		7AFFD0721D591904009E8CB2 /* ParallaxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxView.swift; sourceTree = "<group>"; };
 		7AFFD0731D591904009E8CB2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7AFFD0741D591904009E8CB2 /* ScrollViewDelegateForwarder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewDelegateForwarder.swift; sourceTree = "<group>"; };
+		7AFFD07A1D59199C009E8CB2 /* ParallaxTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxTabViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,9 +86,8 @@
 			isa = PBXGroup;
 			children = (
 				7AFFD06F1D591904009E8CB2 /* ParallaxScrollView */,
-				7AFFD05D1D58D3DC009E8CB2 /* ViewController.swift */,
+				7AFFD07A1D59199C009E8CB2 /* ParallaxTabViewController.swift */,
 				7AFFD03C1D58D23B009E8CB2 /* AppDelegate.swift */,
-				7AFFD0401D58D23B009E8CB2 /* Main.storyboard */,
 				7AFFD0431D58D23B009E8CB2 /* Assets.xcassets */,
 				7AFFD0451D58D23B009E8CB2 /* LaunchScreen.storyboard */,
 				7AFFD0481D58D23B009E8CB2 /* Info.plist */,
@@ -202,7 +199,6 @@
 			files = (
 				7AFFD0471D58D23B009E8CB2 /* LaunchScreen.storyboard in Resources */,
 				7AFFD0441D58D23B009E8CB2 /* Assets.xcassets in Resources */,
-				7AFFD0421D58D23B009E8CB2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,10 +217,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AFFD0781D591904009E8CB2 /* README.md in Sources */,
-				7AFFD05F1D58D3DC009E8CB2 /* ViewController.swift in Sources */,
 				7AFFD0791D591904009E8CB2 /* ScrollViewDelegateForwarder.swift in Sources */,
 				7AFFD0771D591904009E8CB2 /* ParallaxView.swift in Sources */,
 				7AFFD0751D591904009E8CB2 /* ParallaxHeaderController.swift in Sources */,
+				7AFFD07B1D59199C009E8CB2 /* ParallaxTabViewController.swift in Sources */,
 				7AFFD0761D591904009E8CB2 /* ParallaxScrollView.swift in Sources */,
 				7AFFD03D1D58D23B009E8CB2 /* AppDelegate.swift in Sources */,
 			);
@@ -249,14 +245,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		7AFFD0401D58D23B009E8CB2 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7AFFD0411D58D23B009E8CB2 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		7AFFD0451D58D23B009E8CB2 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
