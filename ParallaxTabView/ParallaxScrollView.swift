@@ -18,10 +18,34 @@ import UIKit
 
 class ParallaxScrollView: UIScrollView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     
-    var _lock = false
-    var _isObserving = false
+    private var _lock = false
+    private var _isObserving = false
     
-    static let context = UnsafeMutablePointer<Void>.alloc(1)
+    lazy var parallaxHeader: ParallaxHeaderController? = self.createParallaxHeader()
+    private func createParallaxHeader() -> ParallaxHeaderController {
+        let header = ParallaxHeaderController()
+        header.scrollView = self
+        return header
+    }
+    
+    private(set) var observedViews: [UIScrollView] = []
+    
+    private var delegateForwarder: ScrollViewDelegateForwarder = ScrollViewDelegateForwarder()
+    
+    override var delegate: UIScrollViewDelegate? {
+        get {
+            return delegateForwarder.delegate
+        }
+        
+        set {
+            self.delegateForwarder.delegate = newValue as? ParallaxScrollViewDelegate
+            
+            super.delegate = nil
+            super.delegate = delegateForwarder
+        }
+    }
+    
+    // MARK: - Initialization
     
     convenience init() {
         self.init(frame: .zero)
@@ -48,7 +72,7 @@ class ParallaxScrollView: UIScrollView, UIScrollViewDelegate, UIGestureRecognize
         initialize()
     }
     
-    func initialize() {
+    private func initialize() {
         super.delegate = delegateForwarder
         showsVerticalScrollIndicator = false
         directionalLockEnabled = true
@@ -64,38 +88,7 @@ class ParallaxScrollView: UIScrollView, UIScrollViewDelegate, UIGestureRecognize
         _isObserving = true
     }
     
-    var _parallaxHeader: ParallaxHeaderController?
-    var parallaxHeader: ParallaxHeaderController? {
-        get {
-            if _parallaxHeader == nil {
-                _parallaxHeader = ParallaxHeaderController()
-                _parallaxHeader!.scrollView = self
-            }
-            
-            return _parallaxHeader
-        }
-        
-        set {
-            _parallaxHeader = newValue
-        }
-    }
-    
-    var observedViews: [UIScrollView] = []
-    
-    var delegateForwarder: ScrollViewDelegateForwarder = ScrollViewDelegateForwarder()
-    
-    override var delegate: UIScrollViewDelegate? {
-        get {
-            return delegateForwarder.delegate
-        }
-        
-        set {
-            self.delegateForwarder.delegate = newValue as? ParallaxScrollViewDelegate
-            
-            super.delegate = nil
-            super.delegate = delegateForwarder
-        }
-    }
+    // MARK: - + UIGestureRecognizerDelegate
     
     override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
         if let panRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
@@ -129,6 +122,32 @@ class ParallaxScrollView: UIScrollView, UIScrollViewDelegate, UIGestureRecognize
         return shouldScroll
     }
     
+    // MARK: - + UIScrollViewDelegate & Helpers
+    
+    func scrollView(scrollView: UIScrollView, setContentOffset contentOffset: CGPoint) {
+        _isObserving = false
+        scrollView.contentOffset = contentOffset
+        _isObserving = true
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        guard let parallaxHeader = parallaxHeader else { return }
+        
+        if contentOffset.y > -parallaxHeader.minimumHeight {
+            let offset = CGPoint(x: contentOffset.x, y: -parallaxHeader.minimumHeight)
+            self.scrollView(self, setContentOffset: offset)
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        _lock = false
+        removeObservedViews()
+    }
+    
+    // MARK: - Key-Value Observing
+    
+    static let context = UnsafeMutablePointer<Void>.alloc(1)
+    
     func addObserverToView(scrollView: UIScrollView) {
         scrollView.addObserver(
             self,
@@ -147,7 +166,20 @@ class ParallaxScrollView: UIScrollView, UIScrollViewDelegate, UIGestureRecognize
         )
     }
     
+    func addObservedView(scrollView: UIScrollView) {
+        if observedViews.contains(scrollView) == false {
+            observedViews.append(scrollView)
+            addObserverToView(scrollView)
+        }
+    }
+    
+    func removeObservedViews() {
+        observedViews.forEach(removeObserverFromView)
+        observedViews.removeAll()
+    }
+    
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        
         if context == ParallaxScrollView.context {
             
             guard let keyPath = keyPath where keyPath == "contentOffset" else { return }
@@ -187,8 +219,6 @@ class ParallaxScrollView: UIScrollView, UIScrollViewDelegate, UIGestureRecognize
                 
             }
             
-            
-            
         } else {
             super.observeValueForKeyPath(
                 keyPath,
@@ -197,39 +227,6 @@ class ParallaxScrollView: UIScrollView, UIScrollViewDelegate, UIGestureRecognize
                 context: context
             )
         }
-    }
-    
-    
-    func addObservedView(scrollView: UIScrollView) {
-        if observedViews.contains(scrollView) == false {
-            observedViews.append(scrollView)
-            addObserverToView(scrollView)
-        }
-    }
-    
-    func removeObservedViews() {
-        observedViews.forEach(removeObserverFromView)
-        observedViews.removeAll()
-    }
-    
-    func scrollView(scrollView: UIScrollView, setContentOffset contentOffset: CGPoint) {
-        _isObserving = false
-        scrollView.contentOffset = contentOffset
-        _isObserving = true
-    }
-    
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        guard let parallaxHeader = parallaxHeader else { return }
-        
-        if contentOffset.y > -parallaxHeader.minimumHeight {
-            let offset = CGPoint(x: contentOffset.x, y: -parallaxHeader.minimumHeight)
-            self.scrollView(self, setContentOffset: offset)
-        }
-    }
-    
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        _lock = false
-        removeObservedViews()
     }
     
     deinit {
