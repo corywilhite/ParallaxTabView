@@ -8,8 +8,16 @@
 
 import UIKit
 
+protocol ViewableCategoryObjectType {
+    var title: String { get }
+    var imageURL: String { get }
+    var placeholderImage: UIImage? { get }
+    var sortKey: String { get }
+}
+
 struct ViewableCategory {
-    
+    let tabModel: ParallaxTabModel
+    let viewables: [ViewableCategoryObjectType]
 }
 
 class ParallaxCategoryViewController: UIViewController {
@@ -28,5 +36,7 @@ class ParallaxCategoryViewController: UIViewController {
         view.backgroundColor = .whiteColor()
     }
 }
+
+
 
 

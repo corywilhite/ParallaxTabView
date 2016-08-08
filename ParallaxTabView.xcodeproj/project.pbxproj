@@ -19,6 +19,9 @@
 		7AFFD0811D5923E1009E8CB2 /* ParallaxTabCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD0801D5923E1009E8CB2 /* ParallaxTabCollectionController.swift */; };
 		7AFFD0831D59242C009E8CB2 /* ParallaxTabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD0821D59242C009E8CB2 /* ParallaxTabCollectionViewCell.swift */; };
 		7AFFD0851D592478009E8CB2 /* ParallaxTabCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AFFD0841D592478009E8CB2 /* ParallaxTabCollectionViewCell.xib */; };
+		7AFFD0881D59396B009E8CB2 /* ParallaxCategoryCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD0871D59396B009E8CB2 /* ParallaxCategoryCollectionController.swift */; };
+		7AFFD08A1D593990009E8CB2 /* ParallaxCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD0891D593990009E8CB2 /* ParallaxCategoryCollectionViewCell.swift */; };
+		7AFFD08C1D593A15009E8CB2 /* ParallaxCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AFFD08B1D593A15009E8CB2 /* ParallaxCategoryCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		7AFFD0801D5923E1009E8CB2 /* ParallaxTabCollectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxTabCollectionController.swift; sourceTree = "<group>"; };
 		7AFFD0821D59242C009E8CB2 /* ParallaxTabCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxTabCollectionViewCell.swift; sourceTree = "<group>"; };
 		7AFFD0841D592478009E8CB2 /* ParallaxTabCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParallaxTabCollectionViewCell.xib; sourceTree = "<group>"; };
+		7AFFD0871D59396B009E8CB2 /* ParallaxCategoryCollectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxCategoryCollectionController.swift; sourceTree = "<group>"; };
+		7AFFD0891D593990009E8CB2 /* ParallaxCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		7AFFD08B1D593A15009E8CB2 /* ParallaxCategoryCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParallaxCategoryCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +99,7 @@
 				7AFFD06F1D591904009E8CB2 /* ParallaxScrollView */,
 				7AFFD07A1D59199C009E8CB2 /* ParallaxCategoryViewController.swift */,
 				7AFFD07F1D5923D7009E8CB2 /* Parallax Tab Collection Controller */,
+				7AFFD0861D59393E009E8CB2 /* Parallax Category Collection Controller */,
 				7AFFD03C1D58D23B009E8CB2 /* AppDelegate.swift */,
 				7AFFD0431D58D23B009E8CB2 /* Assets.xcassets */,
 				7AFFD0451D58D23B009E8CB2 /* LaunchScreen.storyboard */,
@@ -130,6 +137,16 @@
 				7AFFD0841D592478009E8CB2 /* ParallaxTabCollectionViewCell.xib */,
 			);
 			path = "Parallax Tab Collection Controller";
+			sourceTree = "<group>";
+		};
+		7AFFD0861D59393E009E8CB2 /* Parallax Category Collection Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7AFFD0871D59396B009E8CB2 /* ParallaxCategoryCollectionController.swift */,
+				7AFFD0891D593990009E8CB2 /* ParallaxCategoryCollectionViewCell.swift */,
+				7AFFD08B1D593A15009E8CB2 /* ParallaxCategoryCollectionViewCell.xib */,
+			);
+			path = "Parallax Category Collection Controller";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,6 +231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AFFD0851D592478009E8CB2 /* ParallaxTabCollectionViewCell.xib in Resources */,
+				7AFFD08C1D593A15009E8CB2 /* ParallaxCategoryCollectionViewCell.xib in Resources */,
 				7AFFD0471D58D23B009E8CB2 /* LaunchScreen.storyboard in Resources */,
 				7AFFD0441D58D23B009E8CB2 /* Assets.xcassets in Resources */,
 			);
@@ -236,9 +254,11 @@
 				7AFFD0791D591904009E8CB2 /* ScrollViewDelegateForwarder.swift in Sources */,
 				7AFFD0831D59242C009E8CB2 /* ParallaxTabCollectionViewCell.swift in Sources */,
 				7AFFD0771D591904009E8CB2 /* ParallaxView.swift in Sources */,
+				7AFFD0881D59396B009E8CB2 /* ParallaxCategoryCollectionController.swift in Sources */,
 				7AFFD0751D591904009E8CB2 /* ParallaxHeaderController.swift in Sources */,
 				7AFFD07B1D59199C009E8CB2 /* ParallaxCategoryViewController.swift in Sources */,
 				7AFFD0811D5923E1009E8CB2 /* ParallaxTabCollectionController.swift in Sources */,
+				7AFFD08A1D593990009E8CB2 /* ParallaxCategoryCollectionViewCell.swift in Sources */,
 				7AFFD0761D591904009E8CB2 /* ParallaxScrollView.swift in Sources */,
 				7AFFD03D1D58D23B009E8CB2 /* AppDelegate.swift in Sources */,
 			);
