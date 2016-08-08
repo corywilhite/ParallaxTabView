@@ -12,6 +12,7 @@ protocol ViewableCategoryObjectType {
     var title: String { get }
     var imageURL: String { get }
     var placeholderImage: UIImage? { get }
+    var gradientImage: UIImage? { get }
     var sortKey: String { get }
 }
 

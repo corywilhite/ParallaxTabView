@@ -54,11 +54,9 @@ class ParallaxCategoryCollectionController: NSObject, UICollectionViewDataSource
         cell.backgroundColor = .whiteColor()
         cell.titleLabel.text = model.title
         cell.imageView.image = model.placeholderImage
+        cell.gradientImageView.image = model.gradientImage
         
         // make request to swap out image on cell
-        
-        // need to create a gradient image view class
-        cell.gradientImageView.image = nil
         
         return cell
     }
