@@ -13,6 +13,11 @@
 		7AFFD0471D58D23B009E8CB2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AFFD0451D58D23B009E8CB2 /* LaunchScreen.storyboard */; };
 		7AFFD0521D58D23B009E8CB2 /* ParallaxTabViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD0511D58D23B009E8CB2 /* ParallaxTabViewTests.swift */; };
 		7AFFD05F1D58D3DC009E8CB2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD05D1D58D3DC009E8CB2 /* ViewController.swift */; };
+		7AFFD0751D591904009E8CB2 /* ParallaxHeaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD0701D591904009E8CB2 /* ParallaxHeaderController.swift */; };
+		7AFFD0761D591904009E8CB2 /* ParallaxScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD0711D591904009E8CB2 /* ParallaxScrollView.swift */; };
+		7AFFD0771D591904009E8CB2 /* ParallaxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD0721D591904009E8CB2 /* ParallaxView.swift */; };
+		7AFFD0781D591904009E8CB2 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD0731D591904009E8CB2 /* README.md */; };
+		7AFFD0791D591904009E8CB2 /* ScrollViewDelegateForwarder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD0741D591904009E8CB2 /* ScrollViewDelegateForwarder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +41,11 @@
 		7AFFD0511D58D23B009E8CB2 /* ParallaxTabViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxTabViewTests.swift; sourceTree = "<group>"; };
 		7AFFD0531D58D23B009E8CB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7AFFD05D1D58D3DC009E8CB2 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7AFFD0701D591904009E8CB2 /* ParallaxHeaderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxHeaderController.swift; sourceTree = "<group>"; };
+		7AFFD0711D591904009E8CB2 /* ParallaxScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxScrollView.swift; sourceTree = "<group>"; };
+		7AFFD0721D591904009E8CB2 /* ParallaxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxView.swift; sourceTree = "<group>"; };
+		7AFFD0731D591904009E8CB2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		7AFFD0741D591904009E8CB2 /* ScrollViewDelegateForwarder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewDelegateForwarder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +87,7 @@
 		7AFFD03B1D58D23B009E8CB2 /* ParallaxTabView */ = {
 			isa = PBXGroup;
 			children = (
-				7AFFD0661D5912B5009E8CB2 /* Parallax Scroll View */,
+				7AFFD06F1D591904009E8CB2 /* ParallaxScrollView */,
 				7AFFD05D1D58D3DC009E8CB2 /* ViewController.swift */,
 				7AFFD03C1D58D23B009E8CB2 /* AppDelegate.swift */,
 				7AFFD0401D58D23B009E8CB2 /* Main.storyboard */,
@@ -97,11 +107,16 @@
 			path = ParallaxTabViewTests;
 			sourceTree = "<group>";
 		};
-		7AFFD0661D5912B5009E8CB2 /* Parallax Scroll View */ = {
+		7AFFD06F1D591904009E8CB2 /* ParallaxScrollView */ = {
 			isa = PBXGroup;
 			children = (
+				7AFFD0701D591904009E8CB2 /* ParallaxHeaderController.swift */,
+				7AFFD0711D591904009E8CB2 /* ParallaxScrollView.swift */,
+				7AFFD0721D591904009E8CB2 /* ParallaxView.swift */,
+				7AFFD0731D591904009E8CB2 /* README.md */,
+				7AFFD0741D591904009E8CB2 /* ScrollViewDelegateForwarder.swift */,
 			);
-			path = "Parallax Scroll View";
+			path = ParallaxScrollView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,7 +220,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AFFD0781D591904009E8CB2 /* README.md in Sources */,
 				7AFFD05F1D58D3DC009E8CB2 /* ViewController.swift in Sources */,
+				7AFFD0791D591904009E8CB2 /* ScrollViewDelegateForwarder.swift in Sources */,
+				7AFFD0771D591904009E8CB2 /* ParallaxView.swift in Sources */,
+				7AFFD0751D591904009E8CB2 /* ParallaxHeaderController.swift in Sources */,
+				7AFFD0761D591904009E8CB2 /* ParallaxScrollView.swift in Sources */,
 				7AFFD03D1D58D23B009E8CB2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

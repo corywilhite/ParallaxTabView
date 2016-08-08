@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "CAAA0D27E8EBA7E6983B7D94D655AC7901A475BA",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "CBB68A6B15BAA920280FF436D42E6267B895679F" : 0,
+    "CAAA0D27E8EBA7E6983B7D94D655AC7901A475BA" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "4EF04AA6-3977-415F-9054-FFD58870D4D6",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "CBB68A6B15BAA920280FF436D42E6267B895679F" : "ParallaxTabView\/ParallaxTabView\/ParallaxScrollView\/",
+    "CAAA0D27E8EBA7E6983B7D94D655AC7901A475BA" : "ParallaxTabView\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "ParallaxTabView",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ParallaxTabView.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/corywilhite\/ParallaxTabView.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CAAA0D27E8EBA7E6983B7D94D655AC7901A475BA"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/corywilhite\/ParallaxScrollView.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CBB68A6B15BAA920280FF436D42E6267B895679F"
+    }
+  ]
+}
