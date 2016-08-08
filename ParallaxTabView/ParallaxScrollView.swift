@@ -157,11 +157,11 @@ class ParallaxScrollView: UIScrollView, UIScrollViewDelegate, UIGestureRecognize
             
             let diff = old.y - new.y
             
-            if diff == 0 || !_isObserving { return }
+            if diff == 0 || _isObserving == false { return }
             
             if let safeObject = object as? NSObject where safeObject == self {
                 
-                if diff > 0 && _lock {
+                if diff > 0 && _lock == true {
                     scrollView(self, setContentOffset: old)
                 } else if (contentOffset.y < -contentInset.top) && bounces == false {
                     
@@ -180,8 +180,7 @@ class ParallaxScrollView: UIScrollView, UIScrollViewDelegate, UIGestureRecognize
                     self.scrollView(scrollView, setContentOffset: old)
                 }
                 
-                
-                if !_lock && ((contentOffset.y > -contentInset.top) || bounces) {
+                if _lock == false && ((contentOffset.y > -contentInset.top) || bounces == true) {
                     let offset = CGPoint(x: scrollView.contentOffset.x, y: -scrollView.contentInset.top)
                     self.scrollView(scrollView, setContentOffset: offset)
                 }
