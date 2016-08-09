@@ -14,10 +14,12 @@ struct HighlightConfiguration {
         case unhighlight
     }
     
-    private var highlightAction: () -> Void = {}
-    private var unhighlightAction: () -> Void = {}
+    typealias AnimationAction = () -> Void
     
-    func on(state: State, action: () -> Void) -> HighlightConfiguration {
+    private var highlightAction: AnimationAction = {}
+    private var unhighlightAction: AnimationAction = {}
+    
+    func on(state: State, action: AnimationAction) -> HighlightConfiguration {
         var temp = self
         
         switch state {
