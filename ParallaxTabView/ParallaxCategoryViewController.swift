@@ -16,6 +16,14 @@ protocol ViewableCategoryObjectType {
     var sortKey: String { get }
 }
 
+struct ViewableCategoryObject: ViewableCategoryObjectType {
+    let title: String
+    let imageURL: String
+    let placeholderImage: UIImage?
+    let gradientImage: UIImage?
+    let sortKey: String
+}
+
 struct ViewableCategory {
     let tabModel: ParallaxTabModel
     let viewables: [ViewableCategoryObjectType]
