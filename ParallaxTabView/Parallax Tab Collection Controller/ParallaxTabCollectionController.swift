@@ -26,47 +26,65 @@ struct ParallaxTabModel {
     }
 }
 
-class ParallaxTabCollectionController: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class ParallaxTabCollectionView: UICollectionView {
     
-    let titles: [ParallaxTabModel]
-    weak var delegate: ParallaxTabCollectionControllerDelegate?
-    
-    var minimumHorizontalTabSpacing: CGFloat = 10
-    
-    lazy var collectionView: UICollectionView = self.createCollectionView()
-    func createCollectionView() -> UICollectionView {
-        
+    required convenience init() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .Horizontal
-        
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.dataSource = self
-        cv.delegate = self
-        cv.scrollEnabled = false
-        cv.allowsMultipleSelection = false
-        cv.backgroundColor = .clearColor()
-        
-        cv.registerNib(
+        self.init(frame: .zero, collectionViewLayout: layout)
+    }
+    
+    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
+        super.init(frame: frame, collectionViewLayout: layout)
+        initialize()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        initialize()
+    }
+    
+    func initialize() {
+        (collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .Horizontal
+        scrollEnabled = false
+        allowsMultipleSelection = false
+        backgroundColor = .clearColor()
+        registerNib(
             ParallaxTabCollectionViewCell.nib,
             forCellWithReuseIdentifier: ParallaxTabCollectionViewCell.identifier
         )
-        
-        return cv
     }
     
-    init(titles: [ParallaxTabModel], delegate: ParallaxTabCollectionControllerDelegate?) {
-        self.titles = titles
-        self.delegate = delegate
+    override func intrinsicContentSize() -> CGSize {
+        let contentSize = collectionViewLayout.collectionViewContentSize()
+        
+        return CGSize(width: contentSize.width, height: 50)
     }
     
     private func xOffsetFromCenterForTabAtIndex(index: CGFloat) -> CGFloat {
         let indexPath = NSIndexPath(forItem: Int(index), inSection: 0)
-        guard let attributes = collectionView.collectionViewLayout.layoutAttributesForItemAtIndexPath(indexPath) else { return 0 }
+        guard let attributes = collectionViewLayout.layoutAttributesForItemAtIndexPath(indexPath) else { return 0 }
         
         let midX = attributes.frame.midX
-        let offset = midX - collectionView.frame.midX
+        let offset = midX - frame.midX
         
         return offset
+    }
+}
+
+
+class ParallaxTabCollectionController: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    // MARK: - Properties
+    
+    let titles: [ParallaxTabModel]
+    weak var delegate: ParallaxTabCollectionControllerDelegate?
+    var minimumHorizontalTabSpacing: CGFloat = 10
+    
+    // MARK: - Initialization
+    
+    init(titles: [ParallaxTabModel]) {
+        self.titles = titles
     }
     
     // MARK: - + UICollectionViewDataSource
@@ -89,7 +107,7 @@ class ParallaxTabCollectionController: NSObject, UICollectionViewDataSource, UIC
         return cell
     }
     
-    // MARK: - + UICollectionViewDelegate
+    // MARK: - + UICollectionViewDelegateFlowLayout (delegate)
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! ParallaxTabCollectionViewCell
@@ -112,7 +130,7 @@ class ParallaxTabCollectionController: NSObject, UICollectionViewDataSource, UIC
         cell.titleLabel.attributedText = titles[indexPath.item].normalAttributedTitle()
     }
     
-    // MARK: - + UICollectionViewDelegateFlowLayout
+    // MARK: - + UICollectionViewDelegateFlowLayout (layout)
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
         return minimumHorizontalTabSpacing

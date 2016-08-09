@@ -22,6 +22,7 @@
 		7AFFD0881D59396B009E8CB2 /* ParallaxCategoryCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD0871D59396B009E8CB2 /* ParallaxCategoryCollectionController.swift */; };
 		7AFFD08A1D593990009E8CB2 /* ParallaxCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD0891D593990009E8CB2 /* ParallaxCategoryCollectionViewCell.swift */; };
 		7AFFD08C1D593A15009E8CB2 /* ParallaxCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AFFD08B1D593A15009E8CB2 /* ParallaxCategoryCollectionViewCell.xib */; };
+		7AFFD0911D5991F3009E8CB2 /* ParallaxHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AFFD0901D5991F3009E8CB2 /* ParallaxHeaderView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		7AFFD0871D59396B009E8CB2 /* ParallaxCategoryCollectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxCategoryCollectionController.swift; sourceTree = "<group>"; };
 		7AFFD0891D593990009E8CB2 /* ParallaxCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		7AFFD08B1D593A15009E8CB2 /* ParallaxCategoryCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParallaxCategoryCollectionViewCell.xib; sourceTree = "<group>"; };
+		7AFFD0901D5991F3009E8CB2 /* ParallaxHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParallaxHeaderView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 			children = (
 				7AFFD06F1D591904009E8CB2 /* ParallaxScrollView */,
 				7AFFD07A1D59199C009E8CB2 /* ParallaxCategoryViewController.swift */,
+				7AFFD0901D5991F3009E8CB2 /* ParallaxHeaderView.xib */,
 				7AFFD07F1D5923D7009E8CB2 /* Parallax Tab Collection Controller */,
 				7AFFD0861D59393E009E8CB2 /* Parallax Category Collection Controller */,
 				7AFFD03C1D58D23B009E8CB2 /* AppDelegate.swift */,
@@ -233,6 +236,7 @@
 				7AFFD0851D592478009E8CB2 /* ParallaxTabCollectionViewCell.xib in Resources */,
 				7AFFD08C1D593A15009E8CB2 /* ParallaxCategoryCollectionViewCell.xib in Resources */,
 				7AFFD0471D58D23B009E8CB2 /* LaunchScreen.storyboard in Resources */,
+				7AFFD0911D5991F3009E8CB2 /* ParallaxHeaderView.xib in Resources */,
 				7AFFD0441D58D23B009E8CB2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
