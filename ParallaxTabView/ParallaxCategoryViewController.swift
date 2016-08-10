@@ -106,7 +106,8 @@ class ParallaxCategoryScrollView: ParallaxScrollView {
             )
         }
         
-        let ptc = ParallaxTabCollectionController(titles: tabModels, delegate: tabDelegate)
+        let ptc = ParallaxTabCollectionController(titles: tabModels)
+        ptc.delegate = tabDelegate
         
         let headerView = ParallaxCategoryScrollView.createParallaxHeaderView()
         headerView.delegate = ptc
@@ -214,6 +215,9 @@ class ParallaxCategoryViewController: UIViewController, ParallaxScrollViewDelega
             options: nil
         ).first as! ParallaxHeaderView
         
+        v.delegate = self.tabController
+        v.dataSource = self.tabController
+        
         v.backgroundColor = .greenColor()
         
         return v
@@ -232,17 +236,21 @@ class ParallaxCategoryViewController: UIViewController, ParallaxScrollViewDelega
             )
         }
         
-        let controller = ParallaxTabCollectionController(titles: tabModels, delegate: self)
+        let controller = ParallaxTabCollectionController(titles: tabModels)
+        controller.delegate = self
         
         return controller
     }
+    
+    let maxHeaderHeight: CGFloat = 200
+    let minHeaderHeight: CGFloat = 64
     
     lazy var parallaxHeaderController: ParallaxHeaderController = self.createParallaxHeaderController(with: self.parallaxHeaderView)
     func createParallaxHeaderController(with headerView: UIView) -> ParallaxHeaderController {
         let controller = ParallaxHeaderController.with(
             customView: headerView,
-            height: 200,
-            minimumHeight: 64
+            height: maxHeaderHeight,
+            minimumHeight: minHeaderHeight
         )
         
         return controller
@@ -306,6 +314,39 @@ class ParallaxCategoryViewController: UIViewController, ParallaxScrollViewDelega
         add(controllers: collectionControllers, to: horizontalScrollView)
         
         view.layoutIfNeeded()
+    }
+    
+    func layout(collectionViews collectionViews: [UICollectionView], in frame: CGRect) {
+        for index in 0..<collectionViews.count {
+            let offsetFrame = CGRectOffset(frame, CGFloat(index) * frame.width, 0)
+            collectionViews[index].frame = offsetFrame
+        }
+    }
+    
+    func allCollectionViews() -> [UICollectionView] {
+        return collectionControllers.map { $0.collectionView }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        parallaxScrollView.contentSize = view.frame.size
+        
+        let newFrame = CGRect(
+            x: view.frame.origin.x,
+            y: view.frame.origin.y,
+            width: view.frame.width,
+            height: view.frame.height - minHeaderHeight
+        )
+        
+        horizontalScrollView.frame = newFrame
+        
+        horizontalScrollView.contentSize = CGSize(
+            width: newFrame.width * CGFloat(collectionControllers.count),
+            height: newFrame.height
+        )
+        
+        layout(collectionViews: allCollectionViews(), in: newFrame)
     }
     
     // MARK: - + ParallaxTabCollectionControllerDelegate

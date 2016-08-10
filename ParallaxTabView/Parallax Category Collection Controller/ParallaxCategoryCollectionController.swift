@@ -51,7 +51,7 @@ class ParallaxCategoryCollectionController: NSObject, UICollectionViewDataSource
         
         let model = category.viewables[indexPath.item]
         
-        cell.backgroundColor = .whiteColor()
+        cell.backgroundColor = .blackColor()
         cell.titleLabel.text = model.title
         cell.imageView.image = model.placeholderImage
         cell.gradientImageView.image = model.gradientImage

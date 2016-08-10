@@ -18,7 +18,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window?.rootViewController = ParallaxCategoryViewController(categories: [])
+        
+        let objects: [ViewableCategoryObjectType] = (0..<50).map { i in
+            return ViewableCategoryObject(
+                title: "\(i)",
+                imageURL: "",
+                placeholderImage: nil,
+                gradientImage: nil,
+                sortKey: "\(i)"
+            )
+        }
+        
+        let c = ViewableCategory(
+            title: "First",
+            viewables: objects
+        )
+        
+        window?.rootViewController = ParallaxCategoryViewController(categories: [c, c, c])
         window?.makeKeyAndVisible()
         
         return true
