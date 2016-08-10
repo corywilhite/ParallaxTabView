@@ -61,7 +61,7 @@ class ParallaxTabCollectionView: UICollectionView {
         return CGSize(width: contentSize.width, height: 50)
     }
     
-    private func xOffsetFromCenterForTabAtIndex(index: CGFloat) -> CGFloat {
+    func xOffsetFromCenterForTabAtIndex(index: CGFloat) -> CGFloat {
         let indexPath = NSIndexPath(forItem: Int(index), inSection: 0)
         guard let attributes = collectionViewLayout.layoutAttributesForItemAtIndexPath(indexPath) else { return 0 }
         
