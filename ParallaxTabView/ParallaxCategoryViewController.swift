@@ -187,16 +187,44 @@ func snapEdges(of view: UIView, to parentView: UIView) {
 
 
 class ParallaxCategoryViewController: UIViewController, ParallaxScrollViewDelegate, ParallaxTabCollectionControllerDelegate {
+    
+    // MARK: - Embedded Types
+    
+    struct Range {
+        let low: CGFloat
+        let high: CGFloat
+    }
+    
+    // MARK: - Variables
+    
     let categories: [ViewableCategory]
+    let backgroundImage = UIImageView(image: nil)
+    let maxHeaderHeight: CGFloat = 200
+    let minHeaderHeight: CGFloat = 64
+    
+    // MARK: - Initialization
+    
+    required init(categories: [ViewableCategory]) {
+        self.categories = categories
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("\(#function) has not been implemented")
+    }
+    
+    // MARK: - Lazy Load variables
     
     lazy var collectionControllers: [ParallaxCategoryCollectionController] = self.createControllers(with: self.categories)
+    
     func createControllers(with categories: [ViewableCategory]) -> [ParallaxCategoryCollectionController] {
         return categories.map { ParallaxCategoryCollectionController(category: $0) }
     }
     
-    let backgroundImage = UIImageView(image: nil)
+    
     
     lazy var horizontalScrollView: UIScrollView = self.configureHorizontalScrollView()
+    
     func configureHorizontalScrollView() -> UIScrollView {
         let sv = UIScrollView(frame: .zero)
         sv.pagingEnabled = true
@@ -207,7 +235,10 @@ class ParallaxCategoryViewController: UIViewController, ParallaxScrollViewDelega
         return sv
     }
     
+    
+    
     lazy var parallaxHeaderView: ParallaxHeaderView = self.createParallaxHeaderView()
+    
     func createParallaxHeaderView() -> ParallaxHeaderView {
         let v = NSBundle(forClass: ParallaxHeaderView.self).loadNibNamed(
             String(ParallaxHeaderView),
@@ -223,7 +254,10 @@ class ParallaxCategoryViewController: UIViewController, ParallaxScrollViewDelega
         return v
     }
     
+    
+    
     lazy var tabController: ParallaxTabCollectionController = self.createTabController(with: self.categories)
+    
     func createTabController(with categories: [ViewableCategory]) -> ParallaxTabCollectionController {
         
         let normalAttributes: [String: AnyObject] = [
@@ -234,7 +268,7 @@ class ParallaxCategoryViewController: UIViewController, ParallaxScrollViewDelega
         ]
         
         let tabModels = categories.map {
-            $0.tabModel(
+            return $0.tabModel(
                 normalAttributes: normalAttributes,
                 selectedAttributes: selectedAttributes
             )
@@ -246,10 +280,10 @@ class ParallaxCategoryViewController: UIViewController, ParallaxScrollViewDelega
         return controller
     }
     
-    let maxHeaderHeight: CGFloat = 200
-    let minHeaderHeight: CGFloat = 64
+    
     
     lazy var parallaxHeaderController: ParallaxHeaderController = self.createParallaxHeaderController(with: self.parallaxHeaderView)
+    
     func createParallaxHeaderController(with headerView: UIView) -> ParallaxHeaderController {
         let controller = ParallaxHeaderController.with(
             customView: headerView,
@@ -260,7 +294,10 @@ class ParallaxCategoryViewController: UIViewController, ParallaxScrollViewDelega
         return controller
     }
     
+    
+    
     lazy var parallaxScrollView: ParallaxScrollView = self.createParallaxScrollView(header: self.parallaxHeaderController)
+    
     func createParallaxScrollView(header header: ParallaxHeaderController) -> ParallaxScrollView {
         let psv = ParallaxScrollView(
             frame: .zero,
@@ -269,6 +306,10 @@ class ParallaxCategoryViewController: UIViewController, ParallaxScrollViewDelega
         )
         return psv
     }
+    
+    
+    // MARK: - Helpers
+    
     
     func addParallaxScrollView() {
         view.addSubview(parallaxScrollView)
@@ -287,43 +328,31 @@ class ParallaxCategoryViewController: UIViewController, ParallaxScrollViewDelega
         }
     }
     
-    required init(categories: [ViewableCategory]) {
-        self.categories = categories
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("\(#function) has not been implemented")
-    }
-    
-    struct Range {
-        let low: CGFloat
-        let high: CGFloat
-    }
-    
-    func normalize(value value: CGFloat, in inputRange: Range, to outputRange: Range) -> CGFloat {
-        return ((value - inputRange.low) / (inputRange.high - inputRange.low)) * (outputRange.high - outputRange.low) + outputRange.low
-    }
-    
-    func calculateVerticalThresholdProgress(for scrollView: UIScrollView, against headerView: ParallaxHeaderView) -> CGFloat {
-        let minHeight = scrollView.contentOffset.y + minHeaderHeight
-        let offsetRange = maxHeaderHeight - minHeaderHeight
-        let vertProgress = fabs(minHeight) / offsetRange
-        
-        return min(1, vertProgress)
-    }
-    
-    func horizontalOffsetInterval(from scrollView: UIScrollView) -> CGFloat {
-        return scrollView.contentOffset.x / scrollView.frame.width
-    }
-    
-    func validatePageInterval(from scrollView: UIScrollView, with calculatedInterval: CGFloat) -> CGFloat? {
-        if fmod(calculatedInterval, 1) == 0 {
-            return calculatedInterval
-        } else {
-            return nil
+    func layout(collectionViews collectionViews: [UICollectionView], in frame: CGRect) {
+        for index in 0..<collectionViews.count {
+            let offsetFrame = CGRectOffset(frame, CGFloat(index) * frame.width, 0)
+            collectionViews[index].frame = offsetFrame
         }
     }
+    
+    func allCollectionViews() -> [UICollectionView] {
+        return collectionControllers.map { $0.collectionView }
+    }
+    
+    func initialIndex() -> CGFloat {
+        return collectionControllers.count <= 2 ? 0 : 1
+    }
+    
+    func establishInitialLayout() {
+        let initialOffset = parallaxHeaderView.tabCollectionView.xOffsetFromCenterForTabAtIndex(initialIndex())
+        
+        horizontalScrollView.contentOffset = CGPoint(x: initialIndex() * horizontalScrollView.bounds.width, y: 0)
+        
+        parallaxHeaderView.tabCollectionView.contentOffset = CGPoint(x: initialOffset, y: 0)
+    }
+    
+    
+    // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -337,43 +366,6 @@ class ParallaxCategoryViewController: UIViewController, ParallaxScrollViewDelega
         
         view.layoutIfNeeded()
     }
-    
-    func initialIndex() -> CGFloat {
-        return 0
-    }
-    
-    func establishInitialLayout() {
-        let initialOffset = parallaxHeaderView.tabCollectionView.xOffsetFromCenterForTabAtIndex(initialIndex())
-        horizontalScrollView.setContentOffset(
-            CGPoint(
-                x: initialIndex() * horizontalScrollView.bounds.width,
-                y: 0
-            ),
-            animated: true
-        )
-        
-        parallaxHeaderView.tabCollectionView.setContentOffset(
-            CGPoint(
-                x: initialOffset,
-                y: 0
-            ),
-            animated: true
-        )
-        
-    }
-    
-    func layout(collectionViews collectionViews: [UICollectionView], in frame: CGRect) {
-        for index in 0..<collectionViews.count {
-            let offsetFrame = CGRectOffset(frame, CGFloat(index) * frame.width, 0)
-            collectionViews[index].frame = offsetFrame
-        }
-    }
-    
-    func allCollectionViews() -> [UICollectionView] {
-        return collectionControllers.map { $0.collectionView }
-    }
-    
-    var _isInitialLayout = true
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -403,9 +395,42 @@ class ParallaxCategoryViewController: UIViewController, ParallaxScrollViewDelega
         _isInitialLayout = false
     }
     
-    var _lastSetIndex: CGFloat = 0
-    let SKIP_INDEX = CGFloat.max
-    var _shouldSelectIndexOnScroll = true
+    
+    // MARK: - Private Scrolling State variables
+    
+    private var _isInitialLayout = true
+    private var _lastSetIndex: CGFloat = 0
+    private let SKIP_INDEX = CGFloat.max
+    private var _shouldSelectIndexOnScroll = true
+    
+    // MARK: - Scrolling Helpers
+    
+    func normalize(value value: CGFloat, in inputRange: Range, to outputRange: Range) -> CGFloat {
+        return ((value - inputRange.low) / (inputRange.high - inputRange.low)) * (outputRange.high - outputRange.low) + outputRange.low
+    }
+    
+    func calculateVerticalThresholdProgress(for scrollView: UIScrollView, against headerView: ParallaxHeaderView) -> CGFloat {
+        let minHeight = scrollView.contentOffset.y + minHeaderHeight
+        let offsetRange = maxHeaderHeight - minHeaderHeight
+        let vertProgress = fabs(minHeight) / offsetRange
+        
+        return min(1, vertProgress)
+    }
+    
+    func horizontalOffsetInterval(from scrollView: UIScrollView) -> CGFloat {
+        return scrollView.contentOffset.x / scrollView.frame.width
+    }
+    
+    func validatePageInterval(from scrollView: UIScrollView, with calculatedInterval: CGFloat) -> CGFloat? {
+        if fmod(calculatedInterval, 1) == 0 {
+            return calculatedInterval
+        } else {
+            return nil
+        }
+    }
+    
+    
+    // MARK: - + ParallaxScrollViewDelegate
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         let vertScrollingProgress = calculateVerticalThresholdProgress(
@@ -456,12 +481,23 @@ class ParallaxCategoryViewController: UIViewController, ParallaxScrollViewDelega
                 let toIndexMainXOffset = horizontalScrollView.bounds.width * toIndex
                 let toIndexTabXOffset = parallaxHeaderView.tabCollectionView.xOffsetFromCenterForTabAtIndex(toIndex)
                 
-                let mainRange = Range(low: _lastSetIndex * horizontalScrollView.bounds.width, high: toIndexMainXOffset)
-                let tabRange = Range(low: currentIndexTabXOffset, high: toIndexTabXOffset)
+                let mainRange = Range(
+                    low: _lastSetIndex * horizontalScrollView.bounds.width,
+                    high: toIndexMainXOffset
+                )
                 
-                let normalizedOffset = normalize(value: currentMainXOffset, in: mainRange, to: tabRange)
+                let tabRange = Range(
+                    low: currentIndexTabXOffset,
+                    high: toIndexTabXOffset
+                )
                 
-                parallaxHeaderView.tabCollectionView.setContentOffset(CGPoint(x: normalizedOffset, y: 0), animated: false)
+                let normalizedOffsetValue = normalize(
+                    value: currentMainXOffset,
+                    in: mainRange,
+                    to: tabRange
+                )
+                
+                parallaxHeaderView.tabCollectionView.contentOffset = CGPoint(x: normalizedOffsetValue, y: 0)
             }
             
             let page = validatePageInterval(from: horizontalScrollView, with: interval)
@@ -487,7 +523,9 @@ class ParallaxCategoryViewController: UIViewController, ParallaxScrollViewDelega
     // MARK: - + ParallaxTabCollectionControllerDelegate
     
     func tabController(tabController: ParallaxTabCollectionController, didSelectTabAtIndex index: Int) {
-        
+        debugPrint("index selected: \(index)")
+        _shouldSelectIndexOnScroll = false
+        horizontalScrollView.setContentOffset(CGPoint(x: horizontalScrollView.bounds.width * CGFloat(index), y: 0), animated: true)
     }
 }
 

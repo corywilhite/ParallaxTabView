@@ -58,14 +58,15 @@ class ParallaxCategoryCollectionViewCell: UICollectionViewCell, Identifiable, Ni
     }
     
     func highlightActions() -> HighlightConfiguration {
-        return HighlightConfiguration()
+        return  HighlightConfiguration()
                 .on(.highlight) {
                     UIView.animateWithDuration(0.2) { [unowned self] in
                         self.titleLabel.alpha = 0
                         self.gradientImageView.alpha = 0
                         self.highlightBackgroundView.alpha = 0.2
                     }
-                }.on(.unhighlight) {
+                }
+                .on(.unhighlight) {
                     UIView.animateWithDuration(0.2) { [unowned self] in
                         self.titleLabel.alpha = 1
                         self.gradientImageView.alpha = 1
