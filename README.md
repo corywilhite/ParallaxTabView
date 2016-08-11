@@ -1,2 +1,2 @@
-# ParallaxScrollView
-Scroll view with a parallax header controller 
+# ParallaxTabView
+Multiple horizontal collection views with a parallax header and tab controller
