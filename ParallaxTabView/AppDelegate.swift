@@ -29,12 +29,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             )
         }
         
-        let c = ViewableCategory(
-            title: "First",
-            viewables: objects
-        )
+        let categories: [ViewableCategory] = ["First", "Second", "Third"].map { title in
+            return ViewableCategory(title: title, viewables: objects)
+        }
         
-        window?.rootViewController = ParallaxCategoryViewController(categories: [c, c, c])
+        window?.rootViewController = ParallaxCategoryViewController(categories: categories)
         window?.makeKeyAndVisible()
         
         return true

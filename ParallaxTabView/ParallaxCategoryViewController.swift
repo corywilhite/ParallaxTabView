@@ -260,7 +260,7 @@ class ParallaxCategoryViewController: UIViewController, ParallaxScrollViewDelega
         v.dataSource = self.tabController
         
         v.backgroundColor = .blueColor()
-        
+        v.titleLabel.textColor = .whiteColor()
         return v
     }
     
@@ -410,8 +410,11 @@ class ParallaxCategoryViewController: UIViewController, ParallaxScrollViewDelega
     
     private var _isInitialLayout = true
     private var _lastSetIndex: CGFloat = 0
-    private let SKIP_INDEX = CGFloat.max
     private var _shouldSelectIndexOnScroll = true
+    // arbitrary flag to determine when to skip tab selection
+    // on horizontal scrolling
+    private let SKIP_INDEX = CGFloat.max
+    
     
     // MARK: - Scrolling Helpers
     
