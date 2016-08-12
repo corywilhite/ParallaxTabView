@@ -38,6 +38,17 @@ struct ViewableCategory {
 
 class ParallaxHeaderView: UIView {
     
+    @IBOutlet weak var tabCollectionView: ParallaxTabCollectionView! {
+        didSet {
+            tabCollectionView.delegate = delegate
+            tabCollectionView.dataSource = dataSource
+        }
+    }
+    @IBOutlet weak var navigationBarContainerView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var backgroundImageView: UIImageView!
+    @IBOutlet weak var logoImageView: UIImageView!
+    
     weak var delegate: protocol<UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>? {
         didSet {
             tabCollectionView.delegate = delegate
@@ -50,12 +61,11 @@ class ParallaxHeaderView: UIView {
         }
     }
     
-    @IBOutlet var tabCollectionView: ParallaxTabCollectionView! {
-        didSet {
-            tabCollectionView.delegate = delegate
-            tabCollectionView.dataSource = dataSource
-        }
+    func update(withVerticalProgress progress: CGFloat) {
+        logoImageView.alpha = progress
+        backgroundImageView.alpha = progress
     }
+    
 }
 
 typealias ParallaxTabDelegate = protocol<UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
@@ -199,8 +209,8 @@ class ParallaxCategoryViewController: UIViewController, ParallaxScrollViewDelega
     
     let categories: [ViewableCategory]
     let backgroundImage = UIImageView(image: nil)
-    let maxHeaderHeight: CGFloat = 200
-    let minHeaderHeight: CGFloat = 64
+    let maxHeaderHeight: CGFloat = 250
+    let minHeaderHeight: CGFloat = 118
     
     // MARK: - Initialization
     
@@ -438,15 +448,36 @@ class ParallaxCategoryViewController: UIViewController, ParallaxScrollViewDelega
             against: parallaxHeaderView
         )
         
-        // update parallaxHeader with vert progress
+        parallaxHeaderView.update(withVerticalProgress: vertScrollingProgress)
         
-//        if (0...1).contains(vertScrollingProgress) && parallaxHeaderView.titleLabel.alpha != 0{
-//            // animate away title label
-//        }
-//        
-//        if vertScrollingProgress == 0 && parallaxHeaderView.titleLabel.alpha != 1 {
-//            // animate in
-//        }
+        // using the minimum header height as the threshold to trigger the title label
+        // animating in and out
+        let shouldAnimateAway = parallaxHeaderView.frame.height > minHeaderHeight
+        let notAlreadyHidden = parallaxHeaderView.titleLabel.alpha != 0
+        
+        
+        // checks to see if the alpha is not already at the desired value to essentially
+        // dedupe the animation blocks
+        
+        if shouldAnimateAway && notAlreadyHidden {
+            // animate away title label
+            UIView.animateWithDuration(0.15) { [unowned self] in
+                self.parallaxHeaderView.titleLabel.alpha = 0
+            }
+        }
+        
+        let notAlreadyShowing = parallaxHeaderView.titleLabel.alpha != 1
+        
+        if shouldAnimateAway == false && notAlreadyShowing {
+            // animate in
+            UIView.animateWithDuration(0.15) { [unowned self] in
+                self.parallaxHeaderView.titleLabel.alpha = 1
+            }
+            
+        }
+        
+        
+        
         
         if scrollView == horizontalScrollView {
             let interval = horizontalOffsetInterval(from: horizontalScrollView)
@@ -525,6 +556,13 @@ class ParallaxCategoryViewController: UIViewController, ParallaxScrollViewDelega
     func tabController(tabController: ParallaxTabCollectionController, didSelectTabAtIndex index: Int) {
         debugPrint("index selected: \(index)")
         _shouldSelectIndexOnScroll = false
+        
+        if CGFloat(index) == _lastSetIndex && collectionControllers[index].collectionView.contentOffset != .zero {
+            debugPrint("same page")
+            collectionControllers[index].collectionView.setContentOffset(.zero, animated: true)
+            
+        }
+        
         horizontalScrollView.setContentOffset(CGPoint(x: horizontalScrollView.bounds.width * CGFloat(index), y: 0), animated: true)
     }
 }
