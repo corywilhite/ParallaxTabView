@@ -68,85 +68,6 @@ class ParallaxHeaderView: UIView {
     
 }
 
-typealias ParallaxTabDelegate = protocol<UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
-
-class ParallaxCategoryScrollView: ParallaxScrollView {
-    
-    var tabCollectionController: ParallaxTabCollectionController?
-    
-    lazy var parallaxHeaderView: ParallaxHeaderView = ParallaxCategoryScrollView.createParallaxHeaderView()
-    static func createParallaxHeaderView() -> ParallaxHeaderView {
-        let v = NSBundle(forClass: ParallaxHeaderView.self).loadNibNamed(
-            String(ParallaxHeaderView),
-            owner: self,
-            options: nil
-        ).first as! ParallaxHeaderView
-        
-        v.backgroundColor = .greenColor()
-        
-        return v
-    }
-    
-    lazy var horizontalScrollView: UIScrollView = self.configureHorizontalScrollView()
-    func configureHorizontalScrollView() -> UIScrollView {
-        let sv = UIScrollView(frame: .zero)
-        sv.pagingEnabled = true
-        sv.bounces = false
-        sv.delegate = self
-        sv.backgroundColor = .clearColor()
-        
-        return sv
-    }
-    
-    var categories: [ViewableCategory] = [] {
-        didSet {
-            configure(with: categories)
-        }
-    }
-    
-    class func with(categories categories: [ViewableCategory], delegate: ParallaxScrollViewDelegate, tabDelegate: ParallaxTabCollectionControllerDelegate) -> ParallaxCategoryScrollView {
-        
-        let normalAttributes: [String: AnyObject] = [:]
-        let selectedAttributes: [String: AnyObject] = [:]
-        
-        let tabModels = categories.map {
-            $0.tabModel(
-                normalAttributes: normalAttributes,
-                selectedAttributes: selectedAttributes
-            )
-        }
-        
-        let ptc = ParallaxTabCollectionController(titles: tabModels)
-        ptc.delegate = tabDelegate
-        
-        let headerView = ParallaxCategoryScrollView.createParallaxHeaderView()
-        headerView.delegate = ptc
-        headerView.dataSource = ptc
-        let header = ParallaxHeaderController.with(
-            customView: headerView,
-            height: 200,
-            minimumHeight: 64
-        )
-        
-        let sv = ParallaxCategoryScrollView(frame: .zero, parallaxHeader: header, delegate: delegate)
-        sv.parallaxHeaderView = headerView
-        sv.categories = categories
-        sv.tabCollectionController = ptc
-        sv.addSubview(sv.horizontalScrollView)
-        
-        snapEdges(of: sv.horizontalScrollView, to: sv)
-        
-        return sv
-    }
-    
-    
-    
-    func configure(with categories: [ViewableCategory]) {
-        
-    }
-    
-}
-
 func snapEdges(of view: UIView, to parentView: UIView) {
     
     parentView.translatesAutoresizingMaskIntoConstraints = false
@@ -196,7 +117,7 @@ func snapEdges(of view: UIView, to parentView: UIView) {
 }
 
 
-class ParallaxCategoryViewController: UIViewController, ParallaxScrollViewDelegate, ParallaxTabCollectionControllerDelegate {
+final class ParallaxCategoryViewController: UIViewController, ParallaxScrollViewDelegate, ParallaxTabCollectionControllerDelegate {
     
     // MARK: - Embedded Types
     
@@ -375,6 +296,16 @@ class ParallaxCategoryViewController: UIViewController, ParallaxScrollViewDelega
         add(controllers: collectionControllers, to: horizontalScrollView)
         
         view.layoutIfNeeded()
+        
+        if tabController.titles.count > 0 {
+            
+            parallaxHeaderView.tabCollectionView.selectItemAtIndexPath(
+                NSIndexPath(forItem: Int(initialIndex()), inSection: 0),
+                animated: true,
+                scrollPosition: .CenteredHorizontally
+            )
+            tabController(self.tabController, didSelectTabAtIndex: Int(initialIndex()))
+        }
     }
     
     override func viewDidLayoutSubviews() {
